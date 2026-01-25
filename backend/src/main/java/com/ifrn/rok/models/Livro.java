@@ -29,10 +29,9 @@ public class Livro {
 
     }
 
-    // Construtor
-    public Livro(@NotBlank @Size(max=100) String titulo, @NotBlank @Size(max=50) String subTitulo,
-                 @NotBlank @Min(15) BigDecimal preco, @NotBlank String conteudo, @NotBlank String sumario,
-                 @NotBlank @Min(30) int numeroPaginas, @NotBlank String isbn, String linkCapaLivro, @NotNull Autor autor) {
+    public Livro(@NotBlank @Size(max=100) String titulo, @NotBlank @Size(max = 50) String subTitulo,
+                 @Min(15) BigDecimal preco, @NotBlank String conteudo, @NotBlank String sumario,
+                 @Min(30) int numeroPaginas, @NotBlank String isbn, Autor autor) {
         this.titulo = titulo;
         this.subTitulo = subTitulo;
         this.preco = preco;
@@ -43,4 +42,41 @@ public class Livro {
         this.autor = autor;
     }
 
+
+    // Getters
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public int getNumeroPaginas() {
+        return numeroPaginas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getConteudo() {
+        return conteudo;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getSubTitulo() {
+        return subTitulo;
+    }
+
+    public String getSumario() {
+        return sumario;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
 }

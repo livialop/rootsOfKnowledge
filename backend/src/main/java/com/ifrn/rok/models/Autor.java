@@ -30,4 +30,13 @@ public class Autor {
         this.nome = nome;
         this.portfolioAutor = portfolioAutor;
     }
+
+    // Getters
+    public String getNome() {
+        return nome;
+    }
+
+    public URL getPortfolioAutor() {
+        return portfolioAutor;
+    }
 }

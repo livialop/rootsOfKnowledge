@@ -4,6 +4,7 @@ import NovoAutor from '../views/NovoAutor.vue'
 import NovoGenero from '../views/NovoGenero.vue'
 import VerGenero from '@/views/VerGenero.vue'
 import VerAutor from '@/views/VerAutor.vue'
+import NovoLivro from '@/views/NovoLivro.vue'
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/ver-autor',
     name: 'VerAutor',
     component: VerAutor
+  },
+  {
+    path: '/novo-livro',
+    name: 'NovoLivro',
+    component: NovoLivro
   }
 ]
 

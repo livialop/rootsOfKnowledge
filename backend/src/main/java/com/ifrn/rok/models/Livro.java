@@ -86,4 +86,41 @@ public class Livro {
     public Genero getGenero() {
         return genero;
     }
+
+    // Setters
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setSubTitulo(String subTitulo) {
+        this.subTitulo = subTitulo;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
+    }
+
+    public void setSumario(String sumario) {
+        this.sumario = sumario;
+    }
+
+    public void setNumeroPaginas(int numeroPaginas) {
+        this.numeroPaginas = numeroPaginas;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
 }

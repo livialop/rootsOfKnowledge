@@ -53,7 +53,7 @@
 
           <div class="action-buttons">
             <button class="back" @click="voltar">Voltar</button>
-            <button class="edit">Editar</button>
+            <button class="edit" @click="editar">Editar</button>
             <button class="delete" @click="deletar">Excluir</button>
           </div>
         </div>
@@ -86,6 +86,10 @@ export default {
   methods: {
     voltar() {
       this.$router.push('/ver-livros');
+    },
+
+    editar() {
+      this.$router.push(`/editar-livro/${this.livro.id}`);
     },
 
     async deletar() {

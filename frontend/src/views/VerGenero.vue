@@ -29,7 +29,7 @@
             <h3>{{ g.nome }}</h3>
 
             <div class="card-actions">
-              <button class="edit">Editar</button>
+              <button class="edit" @click="editarGenero(index)">Editar</button>
               <button class="delete" @click="deletarGenero(index)">
                 Excluir
               </button>
@@ -69,6 +69,11 @@ export default {
   },
 
   methods: {
+    editarGenero(index) {
+      const genero = this.generos[index];
+      this.$router.push(`/editar-genero/${genero.id}`);
+    },
+
     async deletarGenero(index) {
       if (confirm("Tem certeza que deseja excluir este gênero?")) {
         try {

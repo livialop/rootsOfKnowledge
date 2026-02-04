@@ -30,7 +30,7 @@
             
 
             <div class="card-actions">
-              <button class="edit">Editar</button>
+              <button class="edit" @click="editarAutor(index)">Editar</button>
               <button class="delete" @click="deletarAutor(index)">
                 Excluir
               </button>
@@ -70,6 +70,11 @@ export default {
   },
 
   methods: {
+    editarAutor(index) {
+      const autor = this.autores[index];
+      this.$router.push(`/editar-autor/${autor.id}`);
+    },
+
     async deletarAutor(index) {
       if (confirm("Tem certeza que deseja excluir este autor?")) {
         try {

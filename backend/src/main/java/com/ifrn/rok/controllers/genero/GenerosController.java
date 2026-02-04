@@ -2,16 +2,17 @@ package com.ifrn.rok.controllers.genero;
 
 
 import com.ifrn.rok.dto.GenerosDTO;
+import com.ifrn.rok.models.Genero;
 import com.ifrn.rok.repository.GeneroRepository;
 import com.ifrn.rok.repository.LivroRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -31,6 +32,29 @@ public class GenerosController {
         return generoRepository.findAll().stream()
                 .map(GenerosDTO:: new)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/genero/{id}")
+    @Operation(summary = "Visualização de um gênero específico.")
+    public GenerosDTO generoDetalhe(@PathVariable("id") Long id) {
+        Genero genero = generoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gênero não encontrado."));
+        return new GenerosDTO(genero);
+    }
+
+    @PutMapping(value = "/genero/{id}")
+    @Transactional
+    @Operation(summary = "Edição de um gênero específico.")
+    public ResponseEntity<GenerosDTO> editarGenero(@PathVariable("id") Long id, @RequestBody @Valid NovoGeneroForm form) {
+        Genero genero = generoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gênero não encontrado."));
+        
+        // Atualizar o campo nome do gênero existente
+        genero.setNome(form.getNome());
+        
+        Genero generoSalvo = generoRepository.save(genero);
+        
+        return ResponseEntity.ok(new GenerosDTO(generoSalvo));
     }
 
     @DeleteMapping(value = "/genero/{id}")

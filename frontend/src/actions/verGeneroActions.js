@@ -9,6 +9,16 @@ export const getGeneros = async () => {
     return response.data;
 }
 
+export const getGenero = async (id) => {
+    const response = await api.get(`/genero/${id}`);
+    return response.data;
+}
+
+export const editarGenero = async (id, generoData) => {
+    const response = await api.put(`/genero/${id}`, generoData);
+    return response.data;
+}
+
 export const deleteGenero = async (id) => {
     const response = await api.delete(`/genero/${id}`);
     return response.data;

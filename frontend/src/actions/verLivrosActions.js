@@ -14,6 +14,11 @@ export const getLivro = async (id) => {
     return response.data;
 }
 
+export const editarLivro = async (id, livroData) => {
+    const response = await api.put(`/livro/${id}`, livroData);
+    return response.data;
+}
+
 export const deleteLivro = async (id) => {
     const response = await api.delete(`/livro/${id}`);
     return response.data;

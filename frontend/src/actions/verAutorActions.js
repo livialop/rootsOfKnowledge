@@ -9,6 +9,16 @@ export const getAutores = async () => {
     return response.data;
 }
 
+export const getAutor = async (id) => {
+    const response = await api.get(`/autor/${id}`);
+    return response.data;
+}
+
+export const editarAutor = async (id, autorData) => {
+    const response = await api.put(`/autor/${id}`, autorData);
+    return response.data;
+}
+
 export const deleteAutor = async (id) => {
     const response = await api.delete(`/autor/${id}`);
     return response.data;

@@ -7,7 +7,9 @@ import VerAutor from '@/views/VerAutor.vue'
 import NovoLivro from '@/views/NovoLivro.vue'
 import VerLivros from '@/views/VerLivros.vue'
 import VerLivro from '@/views/VerLivro.vue'
-
+import EditarGenero from '@/views/EditarGenero.vue'
+import EditarAutor from '@/views/EditarAutor.vue'
+import EditarLivro from '@/views/EditarLivro.vue'
 const routes = [
   {
     path: '/',
@@ -49,6 +51,21 @@ const routes = [
     path: '/livro/:id',
     name: 'VerLivro',
     component: VerLivro
+  },
+  {
+    path: '/editar-genero/:id',
+    name: 'EditarGenero',
+    component: EditarGenero
+  },
+  {
+    path: '/editar-autor/:id',
+    name: 'EditarAutor',
+    component: EditarAutor
+  },
+  {
+    path: '/editar-livro/:id',
+    name: 'EditarLivro',
+    component: EditarLivro
   }
 ]
 

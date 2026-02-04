@@ -63,7 +63,6 @@
         </div>
       </div>
 
-      <!-- Mascote -->
       <div class="mascote-container">
         <img src="/img/cacto.png" class="mascote" alt="cacto" />
       </div>
@@ -121,7 +120,6 @@ export default {
 </script>
 
 <style scoped>
-/* Fundo */
 .page-container {
   background: linear-gradient(to bottom, #f9eedf, #f3e3ce);
   min-height: 100vh;
@@ -156,7 +154,6 @@ export default {
   padding: 40px;
 }
 
-/* Detalhes do livro */
 .detail-section {
   width: 600px;
   background: #fff7ec;
@@ -248,7 +245,6 @@ button {
   color: #d94e1f;
 }
 
-/* Mascote */
 .mascote-container {
   display: flex;
   justify-content: center;
@@ -260,7 +256,6 @@ button {
   animation: mascoteAnim 2.8s ease-in-out infinite;
 }
 
-/* Mascote animado */
 @keyframes mascoteAnim {
   0% {
     transform: rotate(0deg);
@@ -279,7 +274,6 @@ button {
   }
 }
 
-/* Fade-in */
 @keyframes fade-in {
   from {
     opacity: 0;

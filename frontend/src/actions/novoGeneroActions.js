@@ -5,7 +5,6 @@ const api = axios.create({
 })
 
 export const createNovoGenero = async (generoData) => {
-    // Envia como application/x-www-form-urlencoded para funcionar com @ModelAttribute no backend
     const form = new URLSearchParams();
     Object.keys(generoData || {}).forEach(key => {
         if (generoData[key] !== undefined && generoData[key] !== null) {

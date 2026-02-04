@@ -9,8 +9,6 @@
     <div class="content">
       <div class="list-section">
         <h2>Lista de Autores</h2>
-
-        <!-- Campo de Busca -->
         <div class="search-box">
           <input
             type="text"
@@ -18,8 +16,6 @@
             placeholder="Buscar autor..."
           />
         </div>
-
-        <!-- Lista -->
         <div class="autores-list">
           <div
             v-for="(a, index) in autoresFiltrados"
@@ -39,7 +35,6 @@
         </div>
       </div>
 
-      <!-- Mascote -->
       <div class="mascote-container">
         <img src="/img/cacto.png" class="mascote" alt="cacto" />
       </div>
@@ -107,7 +102,6 @@ export default {
 
 
 <style scoped>
-/* Fundo */
 .page-container {
   background: linear-gradient(to bottom, #f9eedf, #f3e3ce);
   min-height: 100vh;
@@ -142,7 +136,6 @@ export default {
   padding: 40px;
 }
 
-/* Lista de autores */
 .list-section {
   width: 550px;
   background: #fff7ec;
@@ -169,7 +162,6 @@ export default {
   font-size: 16px;
 }
 
-/* Cards */
 .autores-list {
   display: flex;
   flex-direction: column;
@@ -235,7 +227,6 @@ button {
   background: #c64922;
 }
 
-/* Mascote */
 .mascote-container {
   display: flex;
   justify-content: center;
@@ -247,7 +238,6 @@ button {
   animation: mascoteAnim 2.8s ease-in-out infinite;
 }
 
-/* Mascote animado */
 @keyframes mascoteAnim {
   0% {
     transform: rotate(0deg);
@@ -266,7 +256,7 @@ button {
   }
 }
 
-/* Fade-in */
+
 @keyframes fade-in {
   from {
     opacity: 0;

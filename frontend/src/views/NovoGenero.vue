@@ -4,7 +4,6 @@
       <h1>BIBLIOTECA RAÍZES DO SABER</h1>
     </header>
 
-    <!-- Faixa decorativa estilo xilogravura -->
     <div class="faixa"></div>
 
     <div class="content">
@@ -61,9 +60,6 @@ export default {
 </script>
 
 <style scoped>
-/* ---------------------------- */
-/* FUNDO E ESTRUTURA GERAL      */
-/* ---------------------------- */
 .page-container {
   background: linear-gradient(to bottom, #f9eedf, #f3e3ce);
   min-height: 100vh;
@@ -81,7 +77,6 @@ export default {
   letter-spacing: 2px;
 }
 
-/* Faixa decorativa nordestina */
 .faixa {
   width: 100%;
   height: 16px;
@@ -92,9 +87,6 @@ export default {
   );
 }
 
-/* ---------------------------- */
-/* LAYOUT                       */
-/* ---------------------------- */
 .content {
   display: flex;
   justify-content: center;
@@ -103,9 +95,6 @@ export default {
   gap: 60px;
 }
 
-/* ---------------------------- */
-/* FORM CARD                    */
-/* ---------------------------- */
 .form-card {
   width: 480px;
   background: #fff7ec;
@@ -165,7 +154,6 @@ textarea {
   height: 120px;
 }
 
-/* BOTÃO */
 button {
   grid-column: span 2;
   padding: 14px;
@@ -184,10 +172,6 @@ button:hover {
   transform: scale(1.04);
 }
 
-/* ---------------------------- */
-/* MASCOTE                      */
-/* ---------------------------- */
-
 .mascote-container {
   display: flex;
   justify-content: center;
@@ -200,7 +184,6 @@ button:hover {
   animation: mascoteAnim 2.8s ease-in-out infinite;
 }
 
-/* Animação do mascote — braço e livro mexendo */
 @keyframes mascoteAnim {
   0% {
     transform: rotate(0deg) translateY(0);
@@ -219,7 +202,6 @@ button:hover {
   }
 }
 
-/* Fade-in suave */
 @keyframes fade-in {
   from {
     opacity: 0;

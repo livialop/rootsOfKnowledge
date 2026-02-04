@@ -1,7 +1,6 @@
 <template>
   <div class="home">
 
-    <!-- HEADER -->
     <header class="header">
       <div class="logo">
         <span>BIBLIOTECA</span>
@@ -9,28 +8,28 @@
       </div>
     </header>
 
-    <!-- MAIN -->
     <main class="main">
       <section class="text">
         <span class="welcome">BEM-VINDO À</span>
         <h1>BIBLIOTECA<br />RAÍZES DO SABER</h1>
         <p>Descubra o Nordeste, uma terra de cores vibrantes, ritmos contagiantes e histórias de tirar o fôlego.</p>
 
-        <!-- BOTÕES DE AÇÃO -->
         <div class="buttons-section">
           <div class="group">
             <button class="boton" @click="navigateTo('/novo-livro')">Novo Livro</button>
             <button class="boton" @click="navigateTo('/novo-autor')">Novo Autor</button>
             <button class="boton" @click="navigateTo('/novo-genero')">Novo Gênero</button>
+
           </div>
 
           <div class="group">
             <button class="boton" @click="navigateTo('/ver-genero')">Ver Gêneros</button>
+            <button class="boton" @click="navigateTo('/ver-livros')">Ver Livros</button>
+            <button class="boton" @click="navigateTo('/ver-autor')">Ver Autor</button>
           </div>
         </div>
       </section>
 
-      <!-- IMAGEM DIREITA -->
       <section class="image">
         <img src="/img/nordeste.png" alt="Ilustração Nordeste" />
       </section>
@@ -64,7 +63,6 @@ export default {
   min-height: 100vh;
 }
 
-/* HEADER */
 .header {
   padding: 24px 50px;
   background: #fff1db;
@@ -82,13 +80,11 @@ export default {
   color: #f97316;
 }
 
-/* MAIN LAYOUT */
 .main {
   display: flex;
   height: calc(100vh - 120px);
 }
 
-/* TEXT LEFT SIDE */
 .text {
   flex: 1;
   padding: 60px 40px;
@@ -114,7 +110,6 @@ export default {
   max-width: 400px;
 }
 
-/* MAIN BUTTON */
 .boton-main {
   margin-top: 20px;
   padding: 12px 30px;
@@ -127,7 +122,6 @@ export default {
   font-size: 14px;
 }
 
-/* ACTION BUTTONS */
 .buttons-section {
   margin-top: 40px;
 }
@@ -150,7 +144,6 @@ export default {
   width: 100px;
 }
 
-/* IMAGE RIGHT SIDE */
 .image {
   flex: 1;
   background: linear-gradient(135deg, #f97316, #f59e0b);

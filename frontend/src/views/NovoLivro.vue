@@ -4,7 +4,6 @@
       <h1>BIBLIOTECA RAÍZES DO SABER</h1>
     </header>
 
-    <!-- Faixa decorativa estilo xilogravura -->
     <div class="faixa"></div>
 
     <div class="content">
@@ -196,9 +195,6 @@ export default {
 
 
 <style scoped>
-/* ---------------------------- */
-/* FUNDO E ESTRUTURA GERAL      */
-/* ---------------------------- */
 .page-container {
   background: linear-gradient(to bottom, #f9eedf, #f3e3ce);
   min-height: 100vh;
@@ -226,9 +222,6 @@ export default {
   );
 }
 
-/* ---------------------------- */
-/* LAYOUT                       */
-/* ---------------------------- */
 .content {
   display: flex;
   justify-content: center;
@@ -237,9 +230,6 @@ export default {
   gap: 60px;
 }
 
-/* ---------------------------- */
-/* FORM CARD                    */
-/* ---------------------------- */
 .form-card {
   width: 520px;
   background: #fff7ec;
@@ -301,7 +291,6 @@ textarea {
   height: 120px;
 }
 
-/* BOTÃO */
 button {
   grid-column: span 2;
   padding: 14px;
@@ -320,9 +309,6 @@ button:hover {
   transform: scale(1.04);
 }
 
-/* ---------------------------- */
-/* MASCOTE                      */
-/* ---------------------------- */
 .mascote {
   width: 400px;
   animation: mascoteAnim 2.8s ease-in-out infinite;

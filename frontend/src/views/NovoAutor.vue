@@ -10,7 +10,6 @@
       <div class="faixa-xilo"></div>
     </header>
 
-    <!-- CONTEÚDO -->
     <div class="content">
       <div class="form-card">
         <h2>Novo Autor</h2>
@@ -42,7 +41,6 @@
         </form>
       </div>
 
-      <!-- IMAGEM INSTITUCIONAL -->
       <div class="ilustracao-container">
         <img
           src="/img/pergaminho-pena.png"
@@ -84,9 +82,7 @@ export default {
 </script>
 
 <style scoped>
-/* ---------------------------- */
-/* BASE                         */
-/* ---------------------------- */
+
 * {
   box-sizing: border-box;
 }
@@ -98,9 +94,7 @@ export default {
   color: #5c3d2e;
 }
 
-/* ---------------------------- */
-/* TOPO                         */
-/* ---------------------------- */
+
 .topo {
   background: #fff3df;
   padding: 20px 40px 0;
@@ -124,9 +118,6 @@ export default {
   font-weight: 160;
 }
 
-/* ---------------------------- */
-/* FAIXA DECORATIVA             */
-/* ---------------------------- */
 .faixa-xilo {
   height: 10px;
   max-width: 100%;
@@ -139,9 +130,6 @@ export default {
   );
 }
 
-/* ---------------------------- */
-/* LAYOUT                       */
-/* ---------------------------- */
 .content {
   display: flex;
   justify-content: center;
@@ -150,9 +138,6 @@ export default {
   gap: 60px;
 }
 
-/* ---------------------------- */
-/* FORM CARD                    */
-/* ---------------------------- */
 .form-card {
   width: 480px;
   background: #fff7ec;
@@ -212,9 +197,6 @@ textarea {
   height: 120px;
 }
 
-/* ---------------------------- */
-/* BOTÃO                        */
-/* ---------------------------- */
 button {
   grid-column: span 2;
   padding: 14px;
@@ -233,7 +215,6 @@ button:hover {
   transform: scale(1.04);
 }
 
-/* ILUSTRAÇÃO  */
 .ilustracao-container {
   display: flex;
   justify-content: center;
@@ -249,9 +230,6 @@ button:hover {
 
 }
 
-/* ---------------------------- */
-/* ANIMAÇÕES                    */
-/* ---------------------------- */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -263,9 +241,6 @@ button:hover {
   }
 }
 
-/* ---------------------------- */
-/* RESPONSIVO                   */
-/* ---------------------------- */
 @media (max-width: 900px) {
   .content {
     flex-direction: column;

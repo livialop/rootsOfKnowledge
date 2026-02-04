@@ -8,3 +8,8 @@ export const getAutores = async () => {
     const response = await api.get('/autores');
     return response.data;
 }
+
+export const deleteAutor = async (id) => {
+    const response = await api.delete(`/autor/${id}`);
+    return response.data;
+}

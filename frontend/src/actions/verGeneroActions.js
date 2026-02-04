@@ -8,3 +8,8 @@ export const getGeneros = async () => {
     const response = await api.get('/generos');
     return response.data;
 }
+
+export const deleteGenero = async (id) => {
+    const response = await api.delete(`/genero/${id}`);
+    return response.data;
+}

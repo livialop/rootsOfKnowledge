@@ -5,6 +5,8 @@ import NovoGenero from '../views/NovoGenero.vue'
 import VerGenero from '@/views/VerGenero.vue'
 import VerAutor from '@/views/VerAutor.vue'
 import NovoLivro from '@/views/NovoLivro.vue'
+import VerLivros from '@/views/VerLivros.vue'
+import VerLivro from '@/views/VerLivro.vue'
 
 const routes = [
   {
@@ -37,6 +39,16 @@ const routes = [
     path: '/novo-livro',
     name: 'NovoLivro',
     component: NovoLivro
+  },
+  {
+    path: '/ver-livros',
+    name: 'VerLivros',
+    component: VerLivros
+  },
+  {
+    path: '/livro/:id',
+    name: 'VerLivro',
+    component: VerLivro
   }
 ]
 

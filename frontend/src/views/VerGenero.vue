@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { getGeneros } from "../actions/verGeneroActions.js";
+import { getGeneros, deleteGenero } from "../actions/verGeneroActions.js";
 
 export default {
   name: "VerGeneros",
@@ -69,9 +69,20 @@ export default {
   },
 
   methods: {
-    deletarGenero(i) {
+    async deletarGenero(index) {
       if (confirm("Tem certeza que deseja excluir este gênero?")) {
-        this.generos.splice(i, 1);
+        try {
+          const genero = this.generos[index];
+          await deleteGenero(genero.id);
+          this.generos.splice(index, 1);
+        } catch (err) {
+          console.error("Erro ao excluir gênero:", err);
+          if (err.response && err.response.data) {
+            alert(err.response.data);
+          } else {
+            alert("Erro ao excluir o gênero. Tente novamente.");
+          }
+        }
       }
     }
   },

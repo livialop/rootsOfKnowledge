@@ -1,37 +1,40 @@
 <template>
   <div class="page-container">
     <header class="header">
-      <h1>AUTORES CADASTRADOS</h1>
+      <h1>LIVROS CADASTRADOS</h1>
     </header>
 
     <div class="faixa"></div>
 
     <div class="content">
       <div class="list-section">
-        <h2>Lista de Autores</h2>
+        <h2>Lista de Livros</h2>
 
         <!-- Campo de Busca -->
         <div class="search-box">
           <input
             type="text"
             v-model="busca"
-            placeholder="Buscar autor..."
+            placeholder="Buscar livro..."
           />
         </div>
 
         <!-- Lista -->
-        <div class="autores-list">
+        <div class="livros-list">
           <div
-            v-for="(a, index) in autoresFiltrados"
+            v-for="(l, index) in livrosFiltrados"
             :key="index"
-            class="autor-card"
+            class="livro-card"
+            @click="verDetalhes(l)"
           >
-            <h3>Nome: {{ a.nome }} <br> Portfólio: {{ a.portfolioAutor }}</h3>
+            <h3>{{ l.titulo }}</h3>
+            <p class="descricao" v-if="l.nomeAutor">Autor: {{ l.nomeAutor }}</p>
+            <p class="descricao" v-if="l.genero">Gênero: {{ l.genero }}</p>
             
 
             <div class="card-actions">
               <button class="edit">Editar</button>
-              <button class="delete" @click="deletarAutor(index)">
+              <button class="delete" @click="deletarLivro($event, l, index)">
                 Excluir
               </button>
             </div>
@@ -48,41 +51,41 @@
 </template>
 
 <script>
-import { getAutores, deleteAutor } from "../actions/verAutorActions.js";
+import { getLivros, deleteLivro } from "../actions/verLivrosActions.js";
 
 export default {
-  name: "VerAutores",
+  name: "VerLivros",
 
   data() {
     return {
       busca: "",
-      autores: []
+      livros: []
     };
   },
 
   computed: {
-    autoresFiltrados() {
+    livrosFiltrados() {
       const termo = (this.busca || "").toLowerCase();
-      return (this.autores || []).filter((a) =>
-        (a.nome || "").toLowerCase().includes(termo)
+      return (this.livros || []).filter((l) =>
+        (l.titulo || "").toLowerCase().includes(termo)
       );
     }
   },
 
   methods: {
-    async deletarAutor(index) {
-      if (confirm("Tem certeza que deseja excluir este autor?")) {
+    verDetalhes(livro) {
+      this.$router.push(`/livro/${livro.id}`);
+    },
+
+    async deletarLivro(event, livro, index) {
+      event.stopPropagation();
+      if (confirm("Tem certeza que deseja excluir este livro?")) {
         try {
-          const autor = this.autores[index];
-          await deleteAutor(autor.id);
-          this.autores.splice(index, 1);
+          await deleteLivro(livro.id);
+          this.livros.splice(index, 1);
         } catch (err) {
-          console.error("Erro ao excluir autor:", err);
-          if (err.response && err.response.data) {
-            alert(err.response.data);
-          } else {
-            alert("Erro ao excluir o autor. Tente novamente.");
-          }
+          console.error("Erro ao excluir livro:", err);
+          alert("Erro ao excluir o livro. Tente novamente.");
         }
       }
     }
@@ -90,16 +93,15 @@ export default {
 
   async mounted() {
     try {
-      const data = await getAutores();
-      this.autores = Array.isArray(data) ? data : [];
+      const data = await getLivros();
+      this.livros = Array.isArray(data) ? data : [];
     } catch (err) {
-      console.error("Erro ao buscar autores:", err);
-      this.autores = [];
+      console.error("Erro ao buscar livros:", err);
+      this.livros = [];
     }
   }
 };
 </script>
-
 
 <style scoped>
 /* Fundo */
@@ -137,7 +139,7 @@ export default {
   padding: 40px;
 }
 
-/* Lista de autores */
+/* Lista de livros */
 .list-section {
   width: 550px;
   background: #fff7ec;
@@ -165,13 +167,13 @@ export default {
 }
 
 /* Cards */
-.autores-list {
+.livros-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.autor-card {
+.livro-card {
   background: #fff;
   border: 2px solid #f4c542;
   padding: 20px;
@@ -179,13 +181,14 @@ export default {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   transition: 0.25s;
   animation: fade-in 0.4s ease;
+  cursor: pointer;
 }
 
-.autor-card:hover {
+.livro-card:hover {
   transform: scale(1.02);
 }
 
-.autor-card h3 {
+.livro-card h3 {
   font-size: 18px;
   color: #c64922;
 }

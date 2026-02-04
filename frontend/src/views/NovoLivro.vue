@@ -12,7 +12,7 @@
         <h2>Novo Livro</h2>
         <p class="subtitle">Cadastre um novo livro no acervo da biblioteca.</p>
 
-        <form @submit.prevent="salvarLivro">
+        <form @submit.prevent="submitForm">
           <div class="field full">
             <label>Título</label>
             <input
@@ -38,8 +38,9 @@
           <div class="field full">
             <label>Preço</label>
             <input
-              v-model="livro.preco"
+              v-model.number="livro.preco"
               type="number"
+              step="0.01"
               placeholder="Ex: 29.90"
               min="15"
               required
@@ -71,7 +72,7 @@
             <label>ISBN</label>
             <input
               v-model="livro.isbn"
-              type="number"
+              type="text"
               placeholder="Ex: 9788535902778"
               minlength="13"
               maxlength="13"
@@ -81,9 +82,9 @@
 
           <div class="field">
             <label>Autor</label>
-            <select v-model="livro.autor_id">
+            <select v-model.number="livro.autorId" required>
               <option disabled value="">Selecione o autor</option>
-              <option v-for="autor in autores" :key="autor.id" :value="autor.id">
+              <option :value="autor.id" v-for="autor in autores" :key="autor.id">
                 {{ autor.nome }}
               </option>
             </select>
@@ -91,21 +92,12 @@
 
           <div class="field">
             <label>Gênero</label>
-            <select v-model="livro.genero_id">
+            <select v-model.number="livro.generoId" required>
               <option disabled value="">Selecione o gênero</option>
-              <option v-for="genero in generos" :key="genero.id" :value="genero.id">
+              <option :value="genero.id" v-for="genero in generos" :key="genero.id">
                 {{ genero.nome }}
               </option>
             </select>
-          </div>
-
-          <div class="field">
-            <label>ISBN</label>
-            <input
-              v-model="livro.isbn"
-              type="text"
-              placeholder="Ex: 9788535902778"
-            />
           </div>
 
           <div class="field full">
@@ -131,32 +123,66 @@
 <script>
 import { createNovoLivro } from '@/actions/novoLivroActions';
 
-createNovoLivro
 export default {
   name: 'NovoLivro',
   data() {
     return {
       livro: {
         titulo: '',
-        autor: '',
-        genero: ''
-      }
+        subTitulo: '',
+        preco: '',
+        sumario: '',
+        numeroPaginas: '',
+        isbn: '',
+        autorId: null,
+        generoId: null,
+        conteudo: ''
+      },
+      autores: [],
+      generos: []
     };
   },
+  created() {
+    this.loadAutoresGeneros();
+  },
   methods: {
+    async loadAutoresGeneros() {
+      try {
+        const { getAutores } = await import('@/actions/verAutorActions');
+        const { getGeneros } = await import('@/actions/verGeneroActions');
+        this.autores = await getAutores();
+        this.generos = await getGeneros();
+      } catch (error) {
+        console.error('Erro ao carregar autores/gêneros', error);
+      }
+    },
     async submitForm() {
       try {
-        await createNovoLivro(this.livro);
+        // const { createNovoLivro } = await import('@/actions/novoLivroActions');
+        const payload = {
+          titulo: this.livro.titulo,
+          subTitulo: this.livro.subTitulo,
+          preco: this.livro.preco,
+          sumario: this.livro.sumario,
+          numeroPaginas: this.livro.numeroPaginas,
+          isbn: this.livro.isbn,
+          autorId: this.livro.autorId,
+          generoId: this.livro.generoId,
+          conteudo: this.livro.conteudo
+        };
+        console.log('Payload novo livro:', payload);
+        await createNovoLivro(payload);
+        alert('Livro salvo com sucesso.');
         this.livro = {
           titulo: '',
           subTitulo: '',
           preco: '',
-          conteudo: '',
           sumario: '',
           numeroPaginas: '',
           isbn: '',
-          autor: '',
-          genero: ''
+          autorId: null,
+          generoId: null,
+          conteudo: ''
         };
       } catch (error) {
         console.error('Erro ao criar livro: ', error);

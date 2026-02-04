@@ -43,4 +43,13 @@ public class Autor {
     public Long getId() {
         return id;
     }
+
+    // Setters
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setPortfolioAutor(URL portfolioAutor) {
+        this.portfolioAutor = portfolioAutor;
+    }
 }

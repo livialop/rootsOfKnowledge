@@ -2,16 +2,17 @@ package com.ifrn.rok.controllers.autor;
 
 
 import com.ifrn.rok.dto.AutorDTO;
+import com.ifrn.rok.models.Autor;
 import com.ifrn.rok.repository.AutorRepository;
 import com.ifrn.rok.repository.LivroRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -31,6 +32,30 @@ public class AutorController {
         return autorRepository.findAll().stream()
                 .map(AutorDTO:: new)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/autor/{id}")
+    @Operation(summary = "Visualização de um autor específico.")
+    public AutorDTO autorDetalhe(@PathVariable("id") Long id) {
+        Autor autor = autorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado."));
+        return new AutorDTO(autor);
+    }
+
+    @PutMapping(value = "/autor/{id}")
+    @Transactional
+    @Operation(summary = "Edição de um autor específico.")
+    public ResponseEntity<AutorDTO> editarAutor(@PathVariable("id") Long id, @RequestBody @Valid NovoAutorForm form) {
+        Autor autor = autorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado."));
+        
+        // Atualizar os campos do autor existente
+        autor.setNome(form.getNome());
+        autor.setPortfolioAutor(form.getPortfolioAutor());
+        
+        Autor autorSalvo = autorRepository.save(autor);
+        
+        return ResponseEntity.ok(new AutorDTO(autorSalvo));
     }
 
     @DeleteMapping(value = "/autor/{id}")

@@ -30,4 +30,9 @@ public class Genero {
     public Long getId() {
         return id;
     }
+
+    // Setter
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

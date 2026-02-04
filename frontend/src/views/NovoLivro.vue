@@ -4,7 +4,6 @@
       <h1>BIBLIOTECA RAÍZES DO SABER</h1>
     </header>
 
-    <!-- Faixa decorativa estilo xilogravura -->
     <div class="faixa"></div>
 
     <div class="content">
@@ -19,53 +18,37 @@
               v-model="livro.titulo"
               type="text"
               placeholder="Ex: Vidas Secas"
-              max="100"
+              maxlength="100"
               required
             />
           </div>
 
-          <div class="field full">
-            <label>Subtítulo</label>
-            <input
-              v-model="livro.subTitulo"
-              type="text"
-              placeholder="Ex: Uma história de resistência"
-              max="50"
-              required
-            />
+          <div class="field">
+            <label>Autor</label>
+            <select v-model="livro.autorId" required>
+              <option disabled value="">Selecione o autor</option>
+              <option
+                v-for="autor in autores"
+                :key="autor.id"
+                :value="autor.id"
+              >
+                {{ autor.nome }}
+              </option>
+            </select>
           </div>
 
-          <div class="field full">
-            <label>Preço</label>
-            <input
-              v-model.number="livro.preco"
-              type="number"
-              step="0.01"
-              placeholder="Ex: 29.90"
-              min="15"
-              required
-            />
-          </div>
-
-          <div class="field full">
-            <label>Sumário</label>
-            <input
-              v-model="livro.sumario"
-              type="text"
-              placeholder="Ex: 3 capítulos"
-              required
-            />
-          </div>
-
-          <div class="field full">
-            <label>Número de Páginas</label>
-            <input
-              v-model="livro.numeroPaginas"
-              type="number"
-              placeholder="Ex: 150"
-              min="30"
-              required
-            />
+          <div class="field">
+            <label>Gênero</label>
+            <select v-model="livro.generoId" required>
+              <option disabled value="">Selecione o gênero</option>
+              <option
+                v-for="genero in generos"
+                :key="genero.id"
+                :value="genero.id"
+              >
+                {{ genero.nome }}
+              </option>
+            </select>
           </div>
 
           <div class="field full">
@@ -80,31 +63,23 @@
             />
           </div>
 
-          <div class="field">
-            <label>Autor</label>
-            <select v-model.number="livro.autorId" required>
-              <option disabled value="">Selecione o autor</option>
-              <option :value="autor.id" v-for="autor in autores" :key="autor.id">
-                {{ autor.nome }}
-              </option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Gênero</label>
-            <select v-model.number="livro.generoId" required>
-              <option disabled value="">Selecione o gênero</option>
-              <option :value="genero.id" v-for="genero in generos" :key="genero.id">
-                {{ genero.nome }}
-              </option>
-            </select>
+          <div class="field full">
+            <label>Ano de Publicação</label>
+            <input
+              v-model.number="livro.anoPublicacao"
+              type="number"
+              placeholder="Ex: 1938"
+              min="1500"
+              max="2100"
+              required
+            />
           </div>
 
           <div class="field full">
-            <label>Conteúdo</label>
+            <label>Resumo</label>
             <textarea
-              v-model="livro.conteudo"
-              placeholder="Conteúdo da obra..."
+              v-model="livro.resumo"
+              placeholder="Resumo da obra..."
               required
             ></textarea>
           </div>
@@ -122,83 +97,83 @@
 
 <script>
 import { createNovoLivro } from '@/actions/novoLivroActions';
+import { getAutores } from '@/actions/verAutorActions';
+import { getGeneros } from '@/actions/verGeneroActions';
 
 export default {
   name: 'NovoLivro',
+
   data() {
     return {
       livro: {
         titulo: '',
-        subTitulo: '',
-        preco: '',
-        sumario: '',
-        numeroPaginas: '',
+        autorId: '',
+        generoId: '',
         isbn: '',
-        autorId: null,
-        generoId: null,
-        conteudo: ''
+        anoPublicacao: '',
+        resumo: ''
       },
       autores: [],
       generos: []
     };
   },
+
   created() {
     this.loadAutoresGeneros();
   },
+
   methods: {
     async loadAutoresGeneros() {
       try {
-        const { getAutores } = await import('@/actions/verAutorActions');
-        const { getGeneros } = await import('@/actions/verGeneroActions');
         this.autores = await getAutores();
         this.generos = await getGeneros();
       } catch (error) {
         console.error('Erro ao carregar autores/gêneros', error);
       }
     },
+
     async submitForm() {
       try {
-        // const { createNovoLivro } = await import('@/actions/novoLivroActions');
         const payload = {
           titulo: this.livro.titulo,
-          subTitulo: this.livro.subTitulo,
-          preco: this.livro.preco,
-          sumario: this.livro.sumario,
-          numeroPaginas: this.livro.numeroPaginas,
+          autorId: Number(this.livro.autorId),
+          generoId: Number(this.livro.generoId),
           isbn: this.livro.isbn,
-          autorId: this.livro.autorId,
-          generoId: this.livro.generoId,
-          conteudo: this.livro.conteudo
+          anoPublicacao: this.livro.anoPublicacao,
+          resumo: this.livro.resumo
         };
+
         console.log('Payload novo livro:', payload);
+
         await createNovoLivro(payload);
+
         alert('Livro salvo com sucesso.');
+
         this.livro = {
           titulo: '',
-          subTitulo: '',
-          preco: '',
-          sumario: '',
-          numeroPaginas: '',
+          autorId: '',
+          generoId: '',
           isbn: '',
-          autorId: null,
-          generoId: null,
-          conteudo: ''
+          anoPublicacao: '',
+          resumo: ''
         };
       } catch (error) {
-        console.error('Erro ao criar livro: ', error);
+        console.error('Erro ao criar livro:', error);
         alert('Erro ao criar livro. Tente novamente.');
       }
     }
   }
-}
-
+};
 </script>
 
-
 <style scoped>
-/* ---------------------------- */
-/* FUNDO E ESTRUTURA GERAL      */
-/* ---------------------------- */
+.page-container {
+  background: linear-gradient(to bottom, #f9eedf, #f3e3ce);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: #5c3d2e;
+}
+
 .page-container {
   background: linear-gradient(to bottom, #f9eedf, #f3e3ce);
   min-height: 100vh;
@@ -226,9 +201,6 @@ export default {
   );
 }
 
-/* ---------------------------- */
-/* LAYOUT                       */
-/* ---------------------------- */
 .content {
   display: flex;
   justify-content: center;
@@ -237,13 +209,11 @@ export default {
   gap: 60px;
 }
 
-/* ---------------------------- */
-/* FORM CARD                    */
-/* ---------------------------- */
+
 .form-card {
   width: 520px;
   background: #fff7ec;
-  padding: 35px;
+  padding: 56px;
   border-radius: 24px;
   border: 3px solid #f4c542;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
@@ -271,6 +241,7 @@ form {
 
 .full {
   grid-column: span 2;
+  width: 495px;
 }
 
 label {
@@ -301,7 +272,7 @@ textarea {
   height: 120px;
 }
 
-/* BOTÃO */
+
 button {
   grid-column: span 2;
   padding: 14px;
@@ -320,9 +291,7 @@ button:hover {
   transform: scale(1.04);
 }
 
-/* ---------------------------- */
-/* MASCOTE                      */
-/* ---------------------------- */
+
 .mascote {
   width: 400px;
   animation: mascoteAnim 2.8s ease-in-out infinite;

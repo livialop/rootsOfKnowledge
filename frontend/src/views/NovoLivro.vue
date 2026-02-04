@@ -19,6 +19,63 @@
               v-model="livro.titulo"
               type="text"
               placeholder="Ex: Vidas Secas"
+              max="100"
+              required
+            />
+          </div>
+
+          <div class="field full">
+            <label>Subtítulo</label>
+            <input
+              v-model="livro.subTitulo"
+              type="text"
+              placeholder="Ex: Uma história de resistência"
+              max="50"
+              required
+            />
+          </div>
+
+          <div class="field full">
+            <label>Preço</label>
+            <input
+              v-model="livro.preco"
+              type="number"
+              placeholder="Ex: 29.90"
+              min="15"
+              required
+            />
+          </div>
+
+          <div class="field full">
+            <label>Sumário</label>
+            <input
+              v-model="livro.sumario"
+              type="text"
+              placeholder="Ex: 3 capítulos"
+              required
+            />
+          </div>
+
+          <div class="field full">
+            <label>Número de Páginas</label>
+            <input
+              v-model="livro.numeroPaginas"
+              type="number"
+              placeholder="Ex: 150"
+              min="30"
+              required
+            />
+          </div>
+
+          <div class="field full">
+            <label>ISBN</label>
+            <input
+              v-model="livro.isbn"
+              type="number"
+              placeholder="Ex: 9788535902778"
+              minlength="13"
+              maxlength="13"
+              required
             />
           </div>
 
@@ -51,20 +108,12 @@
             />
           </div>
 
-          <div class="field">
-            <label>Ano de Publicação</label>
-            <input
-              v-model="livro.ano_publicacao"
-              type="number"
-              placeholder="Ex: 1938"
-            />
-          </div>
-
           <div class="field full">
-            <label>Resumo</label>
+            <label>Conteúdo</label>
             <textarea
-              v-model="livro.resumo"
-              placeholder="Resumo da obra..."
+              v-model="livro.conteudo"
+              placeholder="Conteúdo da obra..."
+              required
             ></textarea>
           </div>
 
@@ -100,6 +149,12 @@ export default {
         await createNovoLivro(this.livro);
         this.livro = {
           titulo: '',
+          subTitulo: '',
+          preco: '',
+          conteudo: '',
+          sumario: '',
+          numeroPaginas: '',
+          isbn: '',
           autor: '',
           genero: ''
         };

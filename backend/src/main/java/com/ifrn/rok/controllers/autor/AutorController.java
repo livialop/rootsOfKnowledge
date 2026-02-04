@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @RestController
-public class AutorController {
+public class  AutorController {
 
     @Autowired
     AutorRepository autorRepository;
@@ -32,14 +32,6 @@ public class AutorController {
         return autorRepository.findAll().stream()
                 .map(AutorDTO:: new)
                 .collect(Collectors.toList());
-    }
-
-    @GetMapping(value = "/autor/{id}")
-    @Operation(summary = "Visualização de um autor específico.")
-    public AutorDTO autorDetalhe(@PathVariable("id") Long id) {
-        Autor autor = autorRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado."));
-        return new AutorDTO(autor);
     }
 
     @PutMapping(value = "/autor/{id}")

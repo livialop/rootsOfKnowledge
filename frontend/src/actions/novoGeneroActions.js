@@ -5,6 +5,15 @@ const api = axios.create({
 })
 
 export const createNovoGenero = async (generoData) => {
-    const response = await api.post('/novogenero', generoData);
+    // Envia como application/x-www-form-urlencoded para funcionar com @ModelAttribute no backend
+    const form = new URLSearchParams();
+    Object.keys(generoData || {}).forEach(key => {
+        if (generoData[key] !== undefined && generoData[key] !== null) {
+            form.append(key, generoData[key]);
+        }
+    });
+    const response = await api.post('/novogenero', form, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
     return response.data;
 }

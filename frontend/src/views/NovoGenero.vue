@@ -12,18 +12,14 @@
         <h2>Adicionar Gênero</h2>
         <p class="subtitle">Cadastre um novo gênero literário para a biblioteca.</p>
 
-        <form @submit.prevent="salvarGenero">
+        <form @submit.prevent="submitForm">
           <div class="field full">
             <label>Nome do Gênero</label>
-            <input v-model="genero.nome" type="text" placeholder="Ex: Romance" />
-          </div>
-
-          <div class="field full">
-            <label>Descrição (Opcional)</label>
-            <textarea
-              v-model="genero.descricao"
-              placeholder="Descreva brevemente o gênero..."
-            ></textarea>
+            <input 
+              v-model="genero.nome" 
+              type="text" placeholder="Ex: Romance" 
+              required
+            />
           </div>
 
           <button type="submit">Salvar Gênero</button>
@@ -53,15 +49,15 @@ export default {
     async submitForm() {
       try {
         await createNovoGenero(this.genero);
+        alert('Gênero criado com sucesso!');
         this.genero.nome = '';
       } catch (error) {
-        console.error('Erro ao criar autor: ', error);
-        alert('Erro ao criar autor. Tente novamente.');
+        console.error('Erro ao criar gênero: ', error);
+        alert('Erro ao criar gênero. Tente novamente.');
       }
     }
   }
-}
-
+};
 </script>
 
 <style scoped>

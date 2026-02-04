@@ -27,7 +27,6 @@
             class="genero-card"
           >
             <h3>{{ g.nome }}</h3>
-            <p class="descricao">{{ g.descricao || "Sem descrição." }}</p>
 
             <div class="card-actions">
               <button class="edit">Editar</button>
@@ -48,25 +47,23 @@
 </template>
 
 <script>
+import { getGeneros } from "../actions/verGeneroActions.js";
+
 export default {
   name: "VerGeneros",
 
   data() {
     return {
       busca: "",
-      // Exemplo inicial (substituir pelo GET da API depois)
-      generos: [
-        { nome: "Romance", descricao: "Histórias que envolvem amor e emoção." },
-        { nome: "Fantasia", descricao: "Universos mágicos e criaturas incríveis." },
-        { nome: "Terror", descricao: "Histórias assustadoras e sombrias." }
-      ]
+      generos: []
     };
   },
 
   computed: {
     generosFiltrados() {
-      return this.generos.filter(g =>
-        g.nome.toLowerCase().includes(this.busca.toLowerCase())
+      const termo = (this.busca || "").toLowerCase();
+      return (this.generos || []).filter((g) =>
+        (g.nome || "").toLowerCase().includes(termo)
       );
     }
   },
@@ -76,6 +73,16 @@ export default {
       if (confirm("Tem certeza que deseja excluir este gênero?")) {
         this.generos.splice(i, 1);
       }
+    }
+  },
+
+  async mounted() {
+    try {
+      const data = await getGeneros();
+      this.generos = Array.isArray(data) ? data : [];
+    } catch (err) {
+      console.error("Erro ao buscar gêneros:", err);
+      this.generos = [];
     }
   }
 };

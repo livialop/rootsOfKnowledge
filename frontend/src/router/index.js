@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import NovoAutor from '../views/NovoAutor.vue'
 import NovoGenero from '../views/NovoGenero.vue'
 import VerGenero from '@/views/VerGenero.vue'
+import VerAutor from '@/views/VerAutor.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/ver-genero',
     name: 'VerGenero',
     component: VerGenero
+  },
+  {
+    path: '/ver-autor',
+    name: 'VerAutor',
+    component: VerAutor
   }
 ]
 

@@ -15,9 +15,9 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // endpoints afetados
-                .allowedOrigins("http://127.0.0.1:5173") // origem permitida (nesse caso, o localhost com a porta do vue)
+                .allowedOrigins("http://127.0.0.1:5173", "http://localhost:5173") // origem permitida (nesse caso, o localhost com a porta do vue)
                 .allowedMethods("POST", "GET", "DELETE", "PUT", "OPTIONS") // métodos http permitidos
                 .allowedHeaders("*") // headers permitidos
-                .allowCredentials(true); // credentials permite o envio de cookies, sessão e headers de autenticação.
+                .allowCredentials(true);// credentials permite o envio de cookies, sessão e headers de autenticação.
     }
 }

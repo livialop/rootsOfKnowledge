@@ -23,9 +23,10 @@
           </div>
 
           <div class="group">
-            <button class="boton" @click="navigateTo('/ver-genero')">Ver Gêneros</button>
             <button class="boton" @click="navigateTo('/ver-livros')">Ver Livros</button>
             <button class="boton" @click="navigateTo('/ver-autor')">Ver Autor</button>
+            <button class="boton" @click="navigateTo('/ver-genero')">Ver Gêneros</button>
+            
           </div>
         </div>
       </section>

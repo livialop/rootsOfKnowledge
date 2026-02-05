@@ -5,9 +5,11 @@
 - npm (já vem junto com o Node)
 - Git
 ### Para conferir se já tem tudo instalado rode:
-- `node -v`
-- `npm -v`
-- `git --version` 
+```bash
+node -v
+npm -v
+git --version
+``` 
 ### Depois de conferir:
 1. Clone o repositório com o comando: `git clone https://github.com/livialop/rootsOfKnowledge.git`
 2. Entre na pasta do projeto: `cd [caminhoDoDiretorio]/rootsOfKnowledge/frontend/`
@@ -49,6 +51,7 @@ Depois de rodar o backend e o frontend, a aplicação poderá ser acessada no en
 | Método do endpoint  | Rota | Detalhe |
 |         -         |   -  |    -    | 
 | GET | `/autores` | Rota para retornar todos os autores cadastrados.  |
+| GET | `/autor/{id}`| Rota para pegar os detalhes de um autor específico. |
 | PUT | `/autor/{id}` | Rota para editar os detalhes de um autor específico. | 
 | DELETE | `/autor/{id}` | Rota para deletar um autor específico do banco. |
 | POST | `/novoautor` | Rota para adicionar um novo autor ao banco. |
@@ -65,5 +68,15 @@ Depois de rodar o backend e o frontend, a aplicação poderá ser acessada no en
 ## Funcionalidades do sistema
 A aplicação "Raízes do Saber" conta com filtro de nome para gêneros, livros e autores. Basta entrar na página de interesse e utilizar o sistema de filtro para encontrar o que procura:
 
-[ GIF DA BUSCA FUNCIONANDO ]
+![Filtro de busca](imgs/busca.gif)
+![Imagem filtro de busca](imgs/filtro_busca.png)
 
+### Página de novo livro
+![Novo livro](imgs/novolivro1.jpeg)
+![Novo livro](imgs/novolivro.jpeg)
+
+### Página Home
+![Home](imgs/home.gif)
+
+### Busca na navbar da página Home
+![Busca Navbar](imgs/busca_home.gif)

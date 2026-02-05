@@ -34,6 +34,15 @@ public class  AutorController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(value = "/autor/{id}")
+    @Operation(summary = "Buscar um autor específico por ID")
+    public ResponseEntity<AutorDTO> getAutor(@PathVariable("id") Long id) {
+        Autor autor = autorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado."));
+        
+        return ResponseEntity.ok(new AutorDTO(autor));
+    }
+
     @PutMapping(value = "/autor/{id}")
     @Transactional
     @Operation(summary = "Edição de um autor específico.")
